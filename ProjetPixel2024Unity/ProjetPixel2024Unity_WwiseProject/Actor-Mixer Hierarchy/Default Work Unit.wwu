@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{A054F443-D1EE-439E-B10C-BCD88E6C1C16}" SchemaVersion="119">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{A054F443-D1EE-439E-B10C-BCD88E6C1C16}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{A054F443-D1EE-439E-B10C-BCD88E6C1C16}" PersistMode="Standalone">
+			<ChildrenList>
+				<RandomSequenceContainer Name="TestSequence" ID="{9EA60001-D164-403C-B3A0-366DC43BA4EB}" ShortID="270401348">
+					<PropertyList>
+						<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+						<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+						<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{EDD5AADB-B3C0-4376-B564-071D66193C37}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B9DDDE9A-D0ED-45AD-BF38-76F77B2E5474}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="1000 HZ 1 frame" ID="{16F95EDB-1842-42C2-9A9E-BD1FC0DB2FE0}" ShortID="694092530">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{EDD5AADB-B3C0-4376-B564-071D66193C37}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B9DDDE9A-D0ED-45AD-BF38-76F77B2E5474}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="1000 HZ 1 frame" ID="{B97A6444-8E25-4A96-9E43-EFD61C567793}">
+									<Language>SFX</Language>
+									<AudioFile>1000 HZ 1 frame.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="453141628"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="1000 HZ 1 frame" ID="{B97A6444-8E25-4A96-9E43-EFD61C567793}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Emty" ID="{668C287C-14F5-4556-A403-F7EAC79BDDB8}" ShortID="25997748">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{EDD5AADB-B3C0-4376-B564-071D66193C37}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{B9DDDE9A-D0ED-45AD-BF38-76F77B2E5474}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<SourcePlugin Name="Silence" ID="{48734137-61AE-474B-A9EF-79B15DCE1EB2}" ShortID="787976549" PluginName="Wwise Silence" CompanyID="0" PluginID="101">
+									<Language>SFX</Language>
+								</SourcePlugin>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Silence" ID="{48734137-61AE-474B-A9EF-79B15DCE1EB2}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+					<ObjectLists>
+						<ObjectList Name="Playlist">
+							<Reference>
+								<ObjectRef Name="Emty" ID="{668C287C-14F5-4556-A403-F7EAC79BDDB8}" WorkUnitID="{A054F443-D1EE-439E-B10C-BCD88E6C1C16}"/>
+							</Reference>
+							<Reference>
+								<ObjectRef Name="1000 HZ 1 frame" ID="{16F95EDB-1842-42C2-9A9E-BD1FC0DB2FE0}" WorkUnitID="{A054F443-D1EE-439E-B10C-BCD88E6C1C16}"/>
+							</Reference>
+						</ObjectList>
+					</ObjectLists>
+				</RandomSequenceContainer>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>
