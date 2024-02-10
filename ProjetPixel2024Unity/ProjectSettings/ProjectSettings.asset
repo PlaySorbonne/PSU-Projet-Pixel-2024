@@ -156,7 +156,8 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Standalone: com.DefaultCompany.ProjetPixel2024Unity
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -749,7 +750,7 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: ee533dbf-ba93-4fcc-bb54-f4bb55c52549
   framebufferDepthMemorylessMode: 0

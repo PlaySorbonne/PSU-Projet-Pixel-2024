@@ -1,0 +1,124 @@
+{
+    "name": "PlayerBase",
+    "maps": [
+        {
+            "name": "keyboard",
+            "id": "ff25ab89-78d6-4ba3-9a55-550b2c9b0cfc",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "7d877f1e-ddf5-4bfd-b187-818d88be1f18",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "5f77a79b-f5d4-48ef-a16b-698f99af4d43",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "c30dd171-c81e-4379-97be-8eaef0d078c2",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "27bb03c3-88ed-4eab-a41e-87228cbf93a1",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "b58e3acc-5007-4d3d-9028-ab0e5c1b8cbd",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "45846b55-6049-4e93-a9a7-e8696032f6a9",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "gamepad",
+            "id": "9556b2d3-7cf5-4d6e-8651-da6adcea3e48",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "e77fb2e4-7a8a-4a9d-a9a3-a7303b414ef9",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "d3d3523c-3a98-41c2-9a17-4d28a3c0d2e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "211d7d44-2508-42a8-8d21-f22b7b7db826",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d2ed9a9-af65-48f0-ac55-d259e72b03ac",
+                    "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
