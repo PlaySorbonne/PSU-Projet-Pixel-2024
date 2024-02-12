@@ -356,10 +356,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7443408887813606050, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
+      propertyPath: _spawnablePrefabs
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
+      propertyPath: _playerPrefab
+      value: 
+      objectReference: {fileID: -7618125605214968328, guid: ce582312394d4594ebc8b66a130846ec, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
 --- !u!1 &1324120295
@@ -500,5 +508,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: World
       objectReference: {fileID: 0}
+    - target: {fileID: 8734945309924864334, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
+      propertyPath: _scenePathHash
+      value: 1331778478
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734945309924864334, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 5719945012720628447
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734945309924864334, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
+      propertyPath: <IsNested>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
+--- !u!1 &268485721133129483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 268485721235973591, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
+  m_PrefabInstance: {fileID: 268485721133129482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &268485721133129484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8734945309924864334, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
+  m_PrefabInstance: {fileID: 268485721133129482}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &268485721133129485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268485721133129483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  _networkBehaviours: []
+  <ParentNetworkObject>k__BackingField: {fileID: 0}
+  <ChildNetworkObjects>k__BackingField:
+  - {fileID: 268485721133129484}
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+    LocalScale: {x: 1, y: 1, z: 1}
+  _isNetworked: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _defaultDespawnType: 0
+  NetworkObserver: {fileID: 0}
+  <PrefabId>k__BackingField: 0
+  <SpawnableCollectionId>k__BackingField: 0
+  _scenePathHash: 1331778478
+  <SceneId>k__BackingField: 5719945010132556847
+  <AssetPathHash>k__BackingField: 0
