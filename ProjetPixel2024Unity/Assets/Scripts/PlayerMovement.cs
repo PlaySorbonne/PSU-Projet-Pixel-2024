@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 10; //TODO : Try how it feels with force instead of velocity
     public float jumpHeight = 10; 
 
-
     private Rigidbody2D rb;
     private Vector2 movementDirection;
 
@@ -42,5 +41,5 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
     }
 
-
+    
 }
