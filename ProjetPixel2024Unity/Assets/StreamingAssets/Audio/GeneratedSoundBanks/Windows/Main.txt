@@ -1,9 +1,0 @@
-Event	ID	Name			Wwise Object Path	Notes
-	4258653052	Test_Event			\Default Work Unit\Test_Event	
-
-Source plug-ins	ID	Name	Type		Wwise Object Path	Notes
-	787976549	Silence	Wwise Silence		\Actor-Mixer Hierarchy\Default Work Unit\TestSequence\Emty\Silence	
-
-In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	453141628	1000 HZ 1 frame	C:\Users\LENOVO\Documents\GitHub\PSU-Projet-Pixel-2024\ProjetPixel2024Unity\ProjetPixel2024Unity_WwiseProject\.cache\Windows\SFX\1000 HZ 1 frame_818F3B66.wem		\Actor-Mixer Hierarchy\Default Work Unit\TestSequence\1000 HZ 1 frame		6496
-
