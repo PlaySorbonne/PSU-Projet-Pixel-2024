@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FishNet.Connection;
 using FishNet.Object;
+using Unity.VisualScripting;
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public float movementSpeed = 10; //TODO : Try how it feels with force instead of velocity
     public float jumpHeight = 10; 
 
     private Rigidbody2D rb;
-    private Vector2 movementDirection;
+    public Vector2 direction = new Vector2(1,0);
 
     private float f;
 
@@ -47,7 +48,10 @@ public class PlayerMovement : NetworkBehaviour
 
     public void OnMove(InputValue value)
     {
-        //movementDirection.x = value.Get<float>();
+        if (value.Get<float>() != 0.0f) 
+        {
+            direction.x = 1.0f * Mathf.Sign(value.Get<float>());
+        }
         rb.velocity= new Vector2(value.Get<float>() * movementSpeed, rb.velocity.y);
     }
 
@@ -59,7 +63,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public void OnAttack() {
         GameObject attackHitbox = Instantiate(attackHitboxPrefab, transform.position, Quaternion.identity);
-        attackHitbox.transform.position = transform.position + new Vector3(1, 0, 0);
+        attackHitbox.transform.position = transform.position + direction.ConvertTo<Vector3>();
     }
     
 }
