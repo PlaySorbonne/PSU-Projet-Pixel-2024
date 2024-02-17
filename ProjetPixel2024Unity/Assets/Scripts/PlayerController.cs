@@ -15,6 +15,8 @@ public class PlayerMovement : NetworkBehaviour
 
     private float f;
 
+    public GameObject attackHitboxPrefab;
+
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -25,6 +27,7 @@ public class PlayerMovement : NetworkBehaviour
             // idk disable player controller for the other characters i guess
         }
     }
+    
 
     private void Start()
     {
@@ -54,5 +57,9 @@ public class PlayerMovement : NetworkBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
     }
 
-
+    public void OnAttack() {
+        GameObject attackHitbox = Instantiate(attackHitboxPrefab, transform.position, Quaternion.identity);
+        attackHitbox.transform.position = transform.position + new Vector3(1, 0, 0);
+    }
+    
 }
