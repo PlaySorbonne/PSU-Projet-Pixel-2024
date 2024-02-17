@@ -25,7 +25,7 @@ public class PlayerController : NetworkBehaviour
         {
             // pass
         } else {
-            // idk disable player controller for the other characters i guess
+            enabled = false;
         }
     }
     
