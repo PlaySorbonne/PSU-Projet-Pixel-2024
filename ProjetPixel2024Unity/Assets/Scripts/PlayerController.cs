@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 10; //TODO : Try how it feels with force instead of velocity
     public float jumpHeight = 10; 
@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementDirection;
 
     private float f;
+
+    public GameObject attackHitboxPrefab;
 
     private void Start()
     {
@@ -41,5 +43,9 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
     }
 
+    public void OnAttack() {
+        GameObject attackHitbox = Instantiate(attackHitboxPrefab, transform.position, Quaternion.identity);
+        attackHitbox.transform.position = transform.position + new Vector3(1, 0, 0);
+    }
     
 }

@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   jumpHeight: 50
+  attackHitboxPrefab: {fileID: 6596755156023087019, guid: f03de3f1602c2874cbe1a3a910dc9e1d, type: 3}
 --- !u!114 &7838483481906733284
 MonoBehaviour:
   m_ObjectHideFlags: 0
