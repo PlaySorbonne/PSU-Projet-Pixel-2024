@@ -634,7 +634,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: WWISE_ADDRESSABLES_POST_2023
+    Standalone: WWISE_ADDRESSABLES_POST_2023;FISHNET;FISHNET_V3
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

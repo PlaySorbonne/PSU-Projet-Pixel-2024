@@ -12,7 +12,7 @@
   <ShowSpatialAudioWarningMsg>true</ShowSpatialAudioWarningMsg>
   <WwiseInstallationPathMac />
   <WwiseInstallationPathWindows>E:\Wwise 2023.1.0.8367</WwiseInstallationPathWindows>
-  <WwiseProjectPath>../ProjetPixel2024Unity_WwiseProject/ProjetPixel2024Unity_WwiseProject.wproj</WwiseProjectPath>
+  <WwiseProjectPath>../../ProjetPixel2024Unity/ProjetPixel2024Unity_WwiseProject/ProjetPixel2024Unity_WwiseProject.wproj</WwiseProjectPath>
   <UseWaapi>true</UseWaapi>
   <WaapiPort>8080</WaapiPort>
   <WaapiIP>127.0.0.1</WaapiIP>
