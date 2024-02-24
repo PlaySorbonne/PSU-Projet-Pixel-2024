@@ -1,9 +1,46 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class OnScreenDebug : MonoBehaviour{
+    float DEBUG_PRINT_TIME = 2.0f;
+
 	string myLog;
+    List<string> logMessages = new List<string>();
+    List<float> logRemainingTimes = new List<float>();
 	Queue myLogQueue = new Queue();
+
+	private void Start(){
+		Debug.Log("Log1");
+		Debug.Log("Log2");
+        StartCoroutine(DebugLogTest());
+	}
+
+    private IEnumerator DebugLogTest(){
+        yield return new WaitForSeconds(1.0f);
+        Debug.Log("Log3");
+        yield return new WaitForSeconds(1.0f);
+        Debug.Log("Log4");
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < logRemainingTimes.Count; i++)
+        {
+            logRemainingTimes[i] -= Time.deltaTime;
+            if (logRemainingTimes[i] <= 0.0f)
+            {
+                logMessages.RemoveAt(i);
+                logRemainingTimes.RemoveAt(i);
+            }
+        }
+        myLog = string.Empty;
+        for (int i=0; i<logMessages.Count; i++)
+        {
+            myLog += logMessages[i] + "\n";
+        }
+    }
 
 	void OnEnable () {
 		Application.logMessageReceived += HandleLog;
@@ -14,17 +51,8 @@ public class OnScreenDebug : MonoBehaviour{
 	}
 
 	void HandleLog(string logString, string stackTrace, LogType type){
-		myLog = logString;
-		string newString = "[" + type + "] : " + myLog + "\n";
-        myLogQueue.Enqueue(newString);
-        if (type == LogType.Exception) {
-            newString = "" + stackTrace;
-            myLogQueue.Enqueue(newString);
-        }
-        myLog = string.Empty;
-        foreach(string mylog in myLogQueue){
-            myLog += mylog;
-        }
+        logMessages.Add(logString);
+        logRemainingTimes.Add(DEBUG_PRINT_TIME);
     }
 
 	void OnGUI () {
