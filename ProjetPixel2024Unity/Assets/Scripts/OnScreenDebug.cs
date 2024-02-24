@@ -11,19 +11,6 @@ public class OnScreenDebug : MonoBehaviour{
     List<float> logRemainingTimes = new List<float>();
 	Queue myLogQueue = new Queue();
 
-	private void Start(){
-		Debug.Log("Log1");
-		Debug.Log("Log2");
-        StartCoroutine(DebugLogTest());
-	}
-
-    private IEnumerator DebugLogTest(){
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("Log3");
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("Log4");
-    }
-
     private void Update()
     {
         for (int i = 0; i < logRemainingTimes.Count; i++)
