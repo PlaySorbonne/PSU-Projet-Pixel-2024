@@ -23,9 +23,10 @@ public class PlayerController : NetworkBehaviour
         base.OnStartClient();
         if (base.IsOwner)
         {
-            // pass
+            Debug.Log("Setting up owner player");
         } else {
-            enabled = false;
+            Debug.Log("Destroying non-owner player");
+            Destroy(this);
         }
     }
     
