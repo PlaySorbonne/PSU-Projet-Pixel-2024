@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 7838483481906733295}
   - component: {fileID: 7838483481906733291}
   - component: {fileID: 7838483481906733284}
-  - component: {fileID: 1224251937975413002}
-  - component: {fileID: 4932723763716888132}
+  - component: {fileID: 1511292624058816975}
+  - component: {fileID: 896152156205472603}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 1224251937975413002}
-  _networkObjectCache: {fileID: 1224251937975413002}
+  _addedNetworkObject: {fileID: 1511292624058816975}
+  _networkObjectCache: {fileID: 1511292624058816975}
   movementSpeed: 10
   jumpHeight: 50
   direction: {x: 1, y: 0}
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_DefaultActionMap: keyboard
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1224251937975413002
+--- !u!114 &1511292624058816975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,8 +230,8 @@ MonoBehaviour:
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 0
   <SceneId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 0
---- !u!114 &4932723763716888132
+  <AssetPathHash>k__BackingField: 7807759643866311769
+--- !u!114 &896152156205472603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 1224251937975413002}
+  _addedNetworkObject: {fileID: 1511292624058816975}
   _networkObjectCache: {fileID: 0}
   _componentConfiguration: 0
   _synchronizeParent: 0
