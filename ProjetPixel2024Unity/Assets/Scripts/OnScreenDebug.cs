@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 
 public class OnScreenDebug : MonoBehaviour{
-    float DEBUG_PRINT_TIME = 2.0f;
+    float DEBUG_PRINT_TIME = 6.0f;
 
 	string myLog;
     List<string> logMessages = new List<string>();
