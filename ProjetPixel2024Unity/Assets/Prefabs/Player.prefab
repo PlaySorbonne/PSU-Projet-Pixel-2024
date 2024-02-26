@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 7838483481906733288}
   - component: {fileID: 7838483481906733295}
   - component: {fileID: 7838483481906733284}
+  - component: {fileID: 6264894912676273263}
   - component: {fileID: 1511292624058816975}
-  - component: {fileID: -4919559353116492463}
   - component: {fileID: 1667416999669452135}
   m_Layer: 0
   m_Name: Player
@@ -211,6 +211,21 @@ MonoBehaviour:
   m_DefaultActionMap: keyboard
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6264894912676273263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838483481906733294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402926ef33e0a894d9fec352693988ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 1511292624058816975}
+  _networkObjectCache: {fileID: 1511292624058816975}
 --- !u!114 &1511292624058816975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +242,7 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
-  - {fileID: -4919559353116492463}
+  - {fileID: 6264894912676273263}
   - {fileID: 1667416999669452135}
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 0}
   <NestedRootNetworkBehaviours>k__BackingField: []
@@ -241,9 +256,9 @@ MonoBehaviour:
   _initializeOrder: 0
   _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
-  _enablePrediction: 0
-  _predictionType: 0
-  _graphicalObject: {fileID: 0}
+  _enablePrediction: 1
+  _predictionType: 2
+  _graphicalObject: {fileID: 1307848118241050396}
   _enableStateForwarding: 1
   _ownerInterpolation: 1
   _enableTeleport: 0
@@ -253,21 +268,6 @@ MonoBehaviour:
   _scenePathHash: 0
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 7807759643866311769
---- !u!114 &-4919559353116492463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7838483481906733294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402926ef33e0a894d9fec352693988ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 1511292624058816975}
-  _networkObjectCache: {fileID: 1511292624058816975}
 --- !u!114 &1667416999669452135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,5 +285,5 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 1511292624058816975}
   inputActionAsset: {fileID: -944628639613478452, guid: aae12f6661d000848ae527b9a370c842, type: 3}
   movementSpeed: 10
-  jumpHeight: 1
+  jumpHeight: 40
   direction: {x: 1, y: 0}

@@ -23,7 +23,7 @@ public class PlayerControllerV2 : NetworkBehaviour
     private float movementSpeed = 10f;
 
     [SerializeField]
-    private float jumpHeight = 10f;
+    private float jumpHeight = 40f;
 
     [SerializeField]
     private Vector2 direction = new Vector2(1,0);
@@ -54,13 +54,26 @@ public class PlayerControllerV2 : NetworkBehaviour
         if (!IsOwner) return;
     }
 
-    // Update is called once per frame
-    void Update()
+    // // Update is called once per frame
+    // void Update()
+    // {
+    //     if (!IsOwner) return;
+
+    //     _move = _moveAction.ReadValue<float>();
+    // }
+
+    public void OnJump(InputValue value)
     {
         if (!IsOwner) return;
 
-        _move = _moveAction.ReadValue<float>();
-        _jump = _jumpAction.IsPressed();
+        _jump = value.isPressed;
+    }
+
+    public void OnMove(InputValue value)
+    {
+        if (!IsOwner) return;
+
+        _move = value.Get<float>();
     }
 
     private void TimeManagerTickEventHandler()
@@ -68,6 +81,7 @@ public class PlayerControllerV2 : NetworkBehaviour
         if (IsOwner)
         {
             MovementData md = new(_move, _jump);
+            _jump = false;
             Replicate(md);
         }
         else
@@ -90,7 +104,7 @@ public class PlayerControllerV2 : NetworkBehaviour
     {
         if (md.Jump)
         {
-            _rigidbody.AddForce(new Vector2(0.0f, jumpHeight), ForceMode2D.Impulse);
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpHeight);
         }
         if (md.Move != 0.0f) 
         {
