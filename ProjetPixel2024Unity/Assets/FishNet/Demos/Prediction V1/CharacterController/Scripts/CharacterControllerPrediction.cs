@@ -15,6 +15,7 @@ namespace FishNet.Example.Prediction.CharacterControllers
 
     public class CharacterControllerPrediction : NetworkBehaviour
     {
+#if !PREDICTION_V2
         #region Types.
         public struct MoveData : IReplicateData
         {
@@ -61,7 +62,7 @@ namespace FishNet.Example.Prediction.CharacterControllers
 
         public override void OnStartClient()
         {
-            _characterController.enabled = (base.IsServer || base.IsOwner);
+            _characterController.enabled = (base.IsServerStarted || base.IsOwner);
         }
 
         private void OnDestroy()
@@ -80,7 +81,7 @@ namespace FishNet.Example.Prediction.CharacterControllers
                 CheckInput(out MoveData md);
                 Move(md, false);
             }
-            if (base.IsServer)
+            if (base.IsServerStarted)
             {
                 Move(default, true);
                 ReconcileData rd = new ReconcileData(transform.position, transform.rotation);
@@ -119,7 +120,7 @@ namespace FishNet.Example.Prediction.CharacterControllers
             transform.rotation = rd.Rotation;
         }
 
-
+#endif
     }
 
 

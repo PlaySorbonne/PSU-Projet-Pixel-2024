@@ -11,32 +11,36 @@ namespace FishNet.Example.Prediction.Rigidbodies
     public class PredictedBullet : NetworkBehaviour
     {
         //SyncVar to set spawn force. This is set by predicted spawner and sent to the server.
-        [HideInInspector, SyncVar(OnChange = nameof(_startingForce_OnChange))]
-        private Vector3 _startingForce;
+        private readonly SyncVar<Vector3> _startingForce = new SyncVar<Vector3>();
         //Tick to set rb to kinematic.
         private uint _stopTick = TimeManager.UNSET_TICK;
 
-        /* In this example this method is called by the client
-         * after it Instanties the object locally. This occurs before
-         * the client calls network spawn on it. */
+        private void Awake()
+        {
+            _startingForce.OnChange += _startingForce_OnChange;
+        }
+
         public void SetStartingForce(Vector3 value)
         {
-            /* Set the SyncVar so it is sent to the server when this
-             * object is spawned. This will only send to the server if
-             * values are set before network spawning. */
-            _startingForce = value;
+            /* If the object is not yet initialized then
+             * this is being set prior to network spawning.
+             * Such a scenario occurs because the client which is
+             * predicted spawning sets the synctype value before network
+             * spawning to ensure the server receives the value.
+             * Just as when the server sets synctypes, if they are set
+             * before the object is spawned it's gauranteed clients will
+             * get the value in the spawn packet; same practice is used here. */
+            if (!base.IsSpawned)
+                SetVelocity(value);
+
+            _startingForce.Value = value;
         }
 
         //Simple delay destroy so object does not exist forever.
         public override void OnStartServer()
         {
-            StartCoroutine(__DelayDestroy(3f));
 
-            //Set velocity to starting force.
-            SetVelocity(_startingForce);
-            //Server can still override syncvars set by the predicted spawner.
-            Debug.Log("Setting new force.");
-            _startingForce = Vector3.one;
+            StartCoroutine(__DelayDestroy(3f));
         }
 
         public override void OnStartNetwork()
@@ -45,7 +49,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
             /* If server or predicted spawner then add the kinematic
              * tick onto local. Predicted spawner and server should behave
              * as though no time has elapsed since this spawned. */
-            if (base.IsServer || base.Owner.IsLocalClient)
+            if (base.IsServerStarted || base.Owner.IsLocalClient)
             {
                 _stopTick = base.TimeManager.LocalTick + timeToTicks;
             }
@@ -54,7 +58,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
              * amount in the future while subtracting already passed ticks. */
             else
             {
-                uint passed = (uint)Mathf.Max(1, base.TimeManager.Tick - base.TimeManager.LastPacketTick);
+                uint passed = (uint)Mathf.Max(1, base.TimeManager.Tick - base.TimeManager.LastPacketTick.LastRemoteTick);
                 long stopTick = (base.TimeManager.Tick + timeToTicks - passed - 1);
                 if (stopTick > 0)
                     _stopTick = (uint)stopTick;
@@ -93,7 +97,6 @@ namespace FishNet.Example.Prediction.Rigidbodies
         /// </summary>
         public void SetVelocity(Vector3 value)
         {
-            Debug.Log($"Setting velocity on {gameObject.name} to {value}");
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = value;
         }

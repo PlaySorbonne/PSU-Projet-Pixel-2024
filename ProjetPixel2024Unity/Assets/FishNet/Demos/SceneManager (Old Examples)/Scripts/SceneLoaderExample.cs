@@ -86,7 +86,7 @@ namespace FishNet.Example.Scened
 
         private void LoadScene(NetworkObject triggeringIdentity)
         {
-            if (!InstanceFinder.NetworkManager.IsServer)
+            if (!InstanceFinder.NetworkManager.IsServerStarted)
                 return;
 
             //NetworkObject isn't necessarily needed but to ensure its the player only run if found.
@@ -124,7 +124,7 @@ namespace FishNet.Example.Scened
 
             //Make scene data.
             SceneLoadData sld = new SceneLoadData(_scenes);
-            sld.PreferredActiveScene = sld.SceneLookupDatas[0];
+            sld.PreferredActiveScene = new PreferredScene(sld.SceneLookupDatas[0]);
             sld.ReplaceScenes = _replaceOption;
             sld.Options = loadOptions;
             sld.MovedNetworkObjects = movedObjects.ToArray();

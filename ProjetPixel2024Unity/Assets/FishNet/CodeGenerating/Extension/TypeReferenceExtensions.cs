@@ -33,10 +33,11 @@ namespace FishNet.CodeGenerating.Extension
             return str;
         }
 
-		/// <summary>
-		/// Makes a GenericInstanceType.
-		/// </summary>
-		public static GenericInstanceType MakeGenericInstanceType(this TypeReference self)
+
+        /// <summary>
+        /// Makes a GenericInstanceType.
+        /// </summary>
+        public static GenericInstanceType MakeGenericInstanceType(this TypeReference self)
 		{
 			GenericInstanceType instance = new GenericInstanceType(self);
 			foreach (GenericParameter argument in self.GenericParameters)

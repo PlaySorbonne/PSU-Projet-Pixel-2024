@@ -2,7 +2,7 @@
 using FishNet.Connection;
 using FishNet.Object;
 using FishNet.Observing;
-using FishNet.Utility.Constant;
+using FishNet.Utility;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -31,7 +31,6 @@ namespace FishNet.Managing.Observing
         /// 
         /// </summary>
         [Tooltip("True to use the NetworkLOD system.")]
-        [FormerlySerializedAs("_useNetworkLod")]//Remove on 2024/01/01
         [SerializeField]
         private bool _enableNetworkLod;
         /// <summary>
@@ -54,7 +53,6 @@ namespace FishNet.Managing.Observing
         /// 
         /// </summary>
         [Tooltip("True to update visibility for clientHost based on if they are an observer or not.")]
-        [FormerlySerializedAs("_setHostVisibility")]//Remove on 2024/01/01
         [SerializeField]
         private bool _updateHostVisibility = true;
         /// <summary>
@@ -113,7 +111,7 @@ namespace FishNet.Managing.Observing
 
             /* If to update spawned as well then update all networkobservers
              * with the setting and also update renderers. */
-            if (_networkManager.IsServer && HostVisibilityUpdateContains(updateType, HostVisibilityUpdateTypes.Spawned))
+            if (_networkManager.IsServerStarted && HostVisibilityUpdateContains(updateType, HostVisibilityUpdateTypes.Spawned))
             {
                 NetworkConnection clientConn = _networkManager.ClientManager.Connection;
                 foreach (NetworkObject n in _networkManager.ServerManager.Objects.Spawned.Values)
@@ -235,7 +233,6 @@ namespace FishNet.Managing.Observing
         internal void CalculateLevelOfDetail(uint tick)
         {
             
-
             //If here then index is 0 and interval is every tick.
             LevelOfDetailIndex = 0;
         }
