@@ -9,6 +9,7 @@ namespace FishNet.Example.Prediction.Transforms
 {
     public class TransformPrediction : NetworkBehaviour
     {
+#if !PREDICTION_V2
         /// <summary>
         /// Data on how to move.
         /// This is processed locally as well sent to the server for processing.
@@ -75,14 +76,14 @@ namespace FishNet.Example.Prediction.Transforms
             public void SetTick(uint value) => _tick = value;
         }
 
-        #region Serialized.
+#region Serialized.
         /// <summary>
         /// How many units to move per second.
         /// </summary>
         [Tooltip("How many units to move per second.")]
         [SerializeField]
         private float _moveRate = 5f;
-        #endregion
+#endregion
 
         private void Awake()
         {
@@ -128,7 +129,7 @@ namespace FishNet.Example.Prediction.Transforms
                  * automatically determine how to send the data, and run the logic. */
                 Move(md, false);
             }
-            if (base.IsServer)
+            if (base.IsServerStarted)
             {
                 /* Move using default data with true for asServer.
                  * The server will use stored data from the client automatically.
@@ -215,7 +216,7 @@ namespace FishNet.Example.Prediction.Transforms
             transform.rotation = rd.Rotation;
         }
 
-
+#endif
     }
 
 

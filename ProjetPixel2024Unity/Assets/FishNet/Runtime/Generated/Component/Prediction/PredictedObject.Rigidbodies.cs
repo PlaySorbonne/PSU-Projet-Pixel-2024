@@ -12,6 +12,7 @@ namespace FishNet.Component.Prediction
 {
     public partial class PredictedObject : NetworkBehaviour
     {
+#if !PREDICTION_V2
         #region Types.
         [System.Serializable]
         public struct SmoothingData
@@ -202,11 +203,7 @@ namespace FishNet.Component.Prediction
             if (_graphicalAnimators.Length > 0)
             {
                 for (int i = 0; i < _graphicalAnimators.Length; i++)
-#if UNITY_2022_1_OR_NEWER
                     _graphicalAnimators[i].keepAnimatorStateOnDisable = true;
-#else
-                    _graphicalAnimators[i].keepAnimatorStateOnDisable = true;
-#endif
 
                 /* True if at least one animator is on the graphical root. 
                 * Unity gets components in order so it's safe to assume
@@ -236,7 +233,7 @@ namespace FishNet.Component.Prediction
         {
             if (!IsRigidbodyPrediction)
                 return;
-            if (base.IsServer)
+            if (base.IsServerStarted)
                 return;
 
             bool is2D = (_predictionType == PredictionType.Rigidbody2D);
@@ -792,7 +789,7 @@ namespace FishNet.Component.Prediction
         {
             if (!IsRigidbodyPrediction)
                 return false;
-            if (base.IsServer || IsPredictingOwner())
+            if (base.IsServerStarted || IsPredictingOwner())
                 return false;
             if (_spectatorPaused)
                 return false;
@@ -1144,6 +1141,7 @@ namespace FishNet.Component.Prediction
             return true;
         }
         #endregion
+#endif
     }
 
 

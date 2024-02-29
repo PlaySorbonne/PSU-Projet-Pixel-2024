@@ -7,7 +7,7 @@ using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Utility;
 using FishNet.Utility.Performance;
-using GameKit.Utilities;
+using GameKit.Dependencies.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -378,7 +378,7 @@ namespace FishNet.Component.Animating
             get
             {
                 //Don't smooth on server only.
-                if (!base.IsClient)
+                if (!base.IsClientStarted)
                     return false;
                 //Smoothing is disabled.
                 if (!_smoothFloats)
@@ -460,6 +460,7 @@ namespace FishNet.Component.Animating
         {
             InitializeOnce();
         }
+
         private void OnDestroy()
         {
             ChangeTickSubscription(false);
@@ -468,7 +469,6 @@ namespace FishNet.Component.Animating
         [APIExclude]
         public override void OnSpawnServer(NetworkConnection connection)
         {
-            base.OnSpawnServer(connection);
             if (!_isAnimatorEnabled)
                 return;
             if (AnimatorUpdated(out ArraySegment<byte> updatedBytes, true))
@@ -502,6 +502,28 @@ namespace FishNet.Component.Animating
             _unsynchronizedLayerStates.Clear();
             ChangeTickSubscription(false);
         }
+
+        /// <summary>
+        /// Tries to subscribe to TimeManager ticks.
+        /// </summary>
+        private void ChangeTickSubscription(bool subscribe)
+        {
+            if (subscribe == _subscribedToTicks || base.NetworkManager == null)
+                return;
+
+            _subscribedToTicks = subscribe;
+            if (subscribe)
+            {
+                base.NetworkManager.TimeManager.OnPreTick += TimeManager_OnPreTick;
+                base.NetworkManager.TimeManager.OnPostTick += TimeManager_OnPostTick;
+            }
+            else
+            {
+                base.NetworkManager.TimeManager.OnPreTick -= TimeManager_OnPreTick;
+                base.NetworkManager.TimeManager.OnPostTick -= TimeManager_OnPostTick;
+            }
+        }
+
 
 
         /// <summary>
@@ -555,7 +577,7 @@ namespace FishNet.Component.Animating
             if (!_isAnimatorEnabled)
                 return;
 
-            if (base.IsClient)
+            if (base.IsClientStarted)
                 SmoothFloats();
         }
 
@@ -636,27 +658,6 @@ namespace FishNet.Component.Animating
         }
 
         /// <summary>
-        /// Tries to subscribe to TimeManager ticks.
-        /// </summary>
-        private void ChangeTickSubscription(bool subscribe)
-        {
-            if (subscribe == _subscribedToTicks || base.NetworkManager == null)
-                return;
-
-            _subscribedToTicks = subscribe;
-            if (subscribe)
-            {
-                base.NetworkManager.TimeManager.OnPreTick += TimeManager_OnPreTick;
-                base.NetworkManager.TimeManager.OnPostTick += TimeManager_OnPostTick;
-            }
-            else
-            {
-                base.NetworkManager.TimeManager.OnPreTick -= TimeManager_OnPreTick;
-                base.NetworkManager.TimeManager.OnPostTick -= TimeManager_OnPostTick;
-            }
-        }
-
-        /// <summary>
         /// Sets which animator to use. You must call this with the appropriate animator on all clients and server. This change is not automatically synchronized.
         /// </summary>
         /// <param name="animator"></param>
@@ -692,7 +693,7 @@ namespace FishNet.Component.Animating
         private void CheckSendToServer()
         {
             //Cannot send to server if is server or not client.
-            if (base.IsServer || !base.IsClientInitialized)
+            if (base.IsServerStarted || !base.IsClientInitialized)
                 return;
             //Cannot send to server if not client authoritative or don't have authority.
             if (!ClientAuthoritative || !base.IsOwner)
@@ -1163,13 +1164,6 @@ namespace FishNet.Component.Animating
         }
 
         /// <summary>
-        /// Forces values to send next update regardless of time remaining.
-        /// Can be useful if you have a short lasting parameter that you want to ensure goes through.
-        /// </summary>
-        [Obsolete("This does not function anymore. Data is always sent on tick now.")] //Remove on 2024/01/01.
-        public void ForceSend() { }
-
-        /// <summary>
         /// Immediately sends all variables and states of layers.
         /// This is a very bandwidth intensive operation.
         /// </summary>
@@ -1385,7 +1379,7 @@ namespace FishNet.Component.Animating
             //There is no owner.
             else
             {
-                if (!base.IsServer)
+                if (!base.IsServerStarted)
                     return;
             }
 
@@ -1401,7 +1395,7 @@ namespace FishNet.Component.Animating
              * !ClientAuth + IsServer. */
             bool canSend = (clientAuth && base.IsOwner)
                 || (clientAuth && !base.Owner.IsValid)
-                || (!clientAuth && base.IsServer);
+                || (!clientAuth && base.IsServerStarted);
 
             //Only queue a send if proper side.
             if (canSend)
@@ -1494,4 +1488,3 @@ namespace FishNet.Component.Animating
 
     }
 }
-

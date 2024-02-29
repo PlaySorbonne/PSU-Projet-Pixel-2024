@@ -15,6 +15,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
 
     public class RigidbodyPrediction : NetworkBehaviour
     {
+#if !PREDICTION_V2
         #region Types.
         public struct MoveData : IReplicateData
         {
@@ -156,7 +157,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
         {
             /* Server does not replay so it does
              * not need to add gravity. */
-            if (!base.IsServer)
+            if (!base.IsServerInitialized)
                 AddGravity();
         }
 
@@ -172,7 +173,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
                 TryDespawnBullet();
                 TrySpawnBullet();
             }
-            if (base.IsServer)
+            if (base.IsServerInitialized)
             {
                 Move(default, true);
             }
@@ -189,7 +190,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
         {
             /* Reconcile is sent during PostTick because we
              * want to send the rb data AFTER the simulation. */
-            if (base.IsServer)
+            if (base.IsServerInitialized)
             {
                 ReconcileData rd = new ReconcileData(transform.position, transform.rotation, _rigidbody.velocity, _rigidbody.angularVelocity);
                 Reconciliation(rd, true);
@@ -231,11 +232,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
 
                 //Set force to 100f at current forward.
                 PredictedBullet bt = nob.GetComponent<PredictedBullet>();
-                Vector3 force = (transform.forward * 20f);
-                //Set the syncVar 'startingForce'. You could expose the syncvar and set it directly.
-                bt.SetStartingForce(force);
-                //Also apply velocity
-                bt.SetVelocity(force);
+                bt.SetStartingForce(transform.forward * 20f);
                 //Spawn client side, which will send the predicted spawn to server.
                 base.Spawn(nob, base.Owner);
             }
@@ -280,6 +277,7 @@ namespace FishNet.Example.Prediction.Rigidbodies
             _rigidbody.angularVelocity = rd.AngularVelocity;
         }
 
+#endif
     }
 
 }

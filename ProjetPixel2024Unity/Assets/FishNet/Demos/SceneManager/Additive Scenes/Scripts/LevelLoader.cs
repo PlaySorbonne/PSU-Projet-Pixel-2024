@@ -9,7 +9,7 @@ namespace FishNet.Demo.AdditiveScenes
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!base.IsServer)
+            if (!base.IsServerStarted)
                 return;
 
             Player player = GetPlayerOwnedObject(other);
@@ -35,7 +35,7 @@ namespace FishNet.Demo.AdditiveScenes
                 //Load scenes as additive.
                 ReplaceScenes = ReplaceOption.None,
                 //Set the preferred active scene so the client changes active scenes.
-                PreferredActiveScene = lookupData,
+                PreferredActiveScene = new PreferredScene(lookupData),
             };
 
             base.SceneManager.LoadConnectionScenes(player.Owner, sld);
@@ -43,7 +43,7 @@ namespace FishNet.Demo.AdditiveScenes
 
         private void OnTriggerExit(Collider other)
         {
-            if (!base.IsServer)
+            if (!base.IsServerStarted)
                 return;
 
             Player player = GetPlayerOwnedObject(other);
