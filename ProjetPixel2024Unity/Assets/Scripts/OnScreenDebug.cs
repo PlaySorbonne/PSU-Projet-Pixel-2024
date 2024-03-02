@@ -4,25 +4,12 @@ using System.Collections.Generic;
 
 
 public class OnScreenDebug : MonoBehaviour{
-    float DEBUG_PRINT_TIME = 2.0f;
+    float DEBUG_PRINT_TIME = 6.0f;
 
 	string myLog;
     List<string> logMessages = new List<string>();
     List<float> logRemainingTimes = new List<float>();
 	Queue myLogQueue = new Queue();
-
-	private void Start(){
-		Debug.Log("Log1");
-		Debug.Log("Log2");
-        StartCoroutine(DebugLogTest());
-	}
-
-    private IEnumerator DebugLogTest(){
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("Log3");
-        yield return new WaitForSeconds(1.0f);
-        Debug.Log("Log4");
-    }
 
     private void Update()
     {
