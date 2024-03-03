@@ -204,8 +204,28 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 595bb618-0fc3-4f1c-8a40-db8f87f0a52e
-    m_ActionName: Player/jaj[/Keyboard/period]
+    m_ActionId: eb778007-751e-4fa1-bc9e-bced91af9c79
+    m_ActionName: keyboard/Attack[/Keyboard/c,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: df7b141d-e367-4f95-b679-ac61e73229a2
+    m_ActionName: keyboard/Defense[/Keyboard/semicolon]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e77fb2e4-7a8a-4a9d-a9a3-a7303b414ef9
+    m_ActionName: gamepad/Move
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d3d3523c-3a98-41c2-9a17-4d28a3c0d2e8
+    m_ActionName: gamepad/Dash
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 71715a11-ac02-4a8f-b2cf-85ba1934a912
+    m_ActionName: gamepad/Attack
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7e379bc4-b37b-4764-be9e-f0a974abf415
+    m_ActionName: gamepad/Defense
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: keyboard

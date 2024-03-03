@@ -77,7 +77,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Left",
+                    "name": "right",
                     "id": "5d5cd47a-e222-4ed8-a234-0089351eb608",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -88,7 +88,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Right",
+                    "name": "left",
                     "id": "b1574333-d70b-493a-9e74-266aa4208daa",
                     "path": "<Keyboard>/a",
                     "interactions": "",

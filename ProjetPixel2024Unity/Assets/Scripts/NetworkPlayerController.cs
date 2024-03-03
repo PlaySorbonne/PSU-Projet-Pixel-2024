@@ -15,29 +15,37 @@ public class NetworkPlayerController : NetworkBehaviour
 
     private InputAction _moveAction;
 
-    private InputAction _jumpAction;
+    private InputAction _attackAction;
+    private InputAction _defenseAction;
+    private InputAction _dashAction;
 
     private Rigidbody2D _rigidbody;
 
     [SerializeField]
-    private float movementSpeed = 10f;
+    public float movementSpeed = 10f;
 
     [SerializeField]
-    private float jumpHeight = 40f;
+    public float jumpHeight = 40f;
 
     [SerializeField]
     private Vector2 direction = new Vector2(1,0);
 
-    private float _move;
+    private Vector2 _move;
 
-    private bool _jump;
+    private bool _dash;
+    private bool _attack;
+    private bool _defense;
 
     public override void OnStartNetwork()
     {
         _moveAction = inputActionAsset.FindAction("Move");
-        _jumpAction = inputActionAsset.FindAction("Jump");
+        _dashAction = inputActionAsset.FindAction("Dash");
+        _attackAction = inputActionAsset.FindAction("Attack");
+        _defenseAction = inputActionAsset.FindAction("Defense");
+        _attackAction.Enable();
+        _defenseAction.Enable();
         _moveAction.Enable();
-        _jumpAction.Enable();
+        _dashAction.Enable();
         _rigidbody = GetComponent<Rigidbody2D>();
         TimeManager.OnTick += TimeManagerTickEventHandler;
         TimeManager.OnPostTick += TimeManagerPostTickEventHandler;
@@ -54,26 +62,26 @@ public class NetworkPlayerController : NetworkBehaviour
         if (!IsOwner) return;
     }
 
-    public void OnJump(InputValue value)
+    public void OnDash(InputValue value)
     {
         if (!IsOwner) return;
 
-        _jump = value.isPressed;
+        _dash = value.isPressed;
     }
 
     public void OnMove(InputValue value)
     {
         if (!IsOwner) return;
 
-        _move = value.Get<float>();
+        _move = value.Get<Vector2>();
     }
 
     private void TimeManagerTickEventHandler()
     {
         if (IsOwner)
         {
-            MovementData md = new(_move, _jump);
-            _jump = false;
+            MovementData md = new(_move, _dash);
+            _dash = false;
             Replicate(md);
         }
         else
@@ -94,15 +102,15 @@ public class NetworkPlayerController : NetworkBehaviour
     [Replicate]
     private void Replicate(MovementData md, ReplicateState rs = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
     {
-        if (md.Jump)
+        if (md.Dash)
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpHeight);
         }
-        if (md.Move != 0.0f) 
+        if (md.Move.x != 0.0f) 
         {
-            direction.x = 1.0f * Mathf.Sign(md.Move);
+            direction.x = 1.0f * Mathf.Sign(md.Move.x);
         }
-        _rigidbody.velocity = new Vector2(md.Move * movementSpeed, _rigidbody.velocity.y);
+        _rigidbody.velocity = new Vector2(md.Move.x * movementSpeed, _rigidbody.velocity.y);
     }
 
     [Reconcile]
@@ -115,14 +123,14 @@ public class NetworkPlayerController : NetworkBehaviour
     private struct MovementData : IReplicateData
     {
         private uint _tick;
-        public readonly float Move;
-        public readonly bool Jump;
+        public readonly Vector2 Move;
+        public readonly bool Dash;
 
-        public MovementData(float move, bool jump)
+        public MovementData(Vector2 move, bool dash)
         {
             _tick = 0u;
             Move = move;
-            Jump = jump;
+            Dash = dash;
         }
 
         public readonly uint GetTick()
