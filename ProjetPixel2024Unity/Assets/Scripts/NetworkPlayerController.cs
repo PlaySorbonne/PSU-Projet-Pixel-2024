@@ -11,15 +11,15 @@ using UnityEngine.InputSystem;
 public class NetworkPlayerController : NetworkBehaviour
 {
     [SerializeField]
-    private InputActionAsset inputActionAsset;
+    protected InputActionAsset inputActionAsset;
 
-    private InputAction _moveAction;
+    protected InputAction _moveAction;
 
-    private InputAction _attackAction;
-    private InputAction _defenseAction;
-    private InputAction _dashAction;
+    protected InputAction _attackAction;
+    protected InputAction _defenseAction;
+    protected InputAction _dashAction;
 
-    private Rigidbody2D _rigidbody;
+    protected Rigidbody2D _rigidbody;
 
     [SerializeField]
     public float movementSpeed = 10f;
@@ -28,13 +28,13 @@ public class NetworkPlayerController : NetworkBehaviour
     public float jumpHeight = 40f;
 
     [SerializeField]
-    private Vector2 direction = new Vector2(1,0);
+    protected Vector2 direction = new Vector2(1,0);
 
-    private Vector2 _move;
+    protected Vector2 _move;
 
-    private bool _dash;
-    private bool _attack;
-    private bool _defense;
+    protected bool _dash;
+    protected bool _attack;
+    protected bool _defense;
 
     public override void OnStartNetwork()
     {
@@ -76,7 +76,7 @@ public class NetworkPlayerController : NetworkBehaviour
         _move = value.Get<Vector2>();
     }
 
-    private void TimeManagerTickEventHandler()
+    protected void TimeManagerTickEventHandler()
     {
         if (IsOwner)
         {
@@ -90,7 +90,7 @@ public class NetworkPlayerController : NetworkBehaviour
         }
     }
 
-    private void TimeManagerPostTickEventHandler()
+    protected void TimeManagerPostTickEventHandler()
     {
         if (!IsServerStarted) return;
 
@@ -100,7 +100,7 @@ public class NetworkPlayerController : NetworkBehaviour
     }
 
     [Replicate]
-    private void Replicate(MovementData md, ReplicateState rs = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
+    protected void Replicate(MovementData md, ReplicateState rs = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
     {
         if (md.Dash)
         {
@@ -114,7 +114,7 @@ public class NetworkPlayerController : NetworkBehaviour
     }
 
     [Reconcile]
-    private void Reconcile(ReconciliationData rd, Channel channel = Channel.Unreliable)
+    protected void Reconcile(ReconciliationData rd, Channel channel = Channel.Unreliable)
     {
         _rigidbody.MovePosition(rd.Position);
         _rigidbody.velocity = rd.Velocity;
