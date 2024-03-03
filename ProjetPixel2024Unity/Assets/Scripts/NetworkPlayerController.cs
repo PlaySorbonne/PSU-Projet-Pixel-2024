@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerControllerV2 : NetworkBehaviour
+public class NetworkPlayerController : NetworkBehaviour
 {
     [SerializeField]
     private InputActionAsset inputActionAsset;
@@ -53,14 +53,6 @@ public class PlayerControllerV2 : NetworkBehaviour
     {
         if (!IsOwner) return;
     }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-    //     if (!IsOwner) return;
-
-    //     _move = _moveAction.ReadValue<float>();
-    // }
 
     public void OnJump(InputValue value)
     {

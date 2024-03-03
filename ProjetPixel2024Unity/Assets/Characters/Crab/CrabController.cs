@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrabController : PlayerControllerV2
+public class CrabController : NetworkPlayerController
 {
     // Start is called before the first frame update
     void Start()
