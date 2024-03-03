@@ -10,6 +10,15 @@ using UnityEngine.InputSystem;
 
 public class NetworkPlayerController : NetworkBehaviour
 {
+    [Header("Gameplay variables")]
+    public int health = 5;
+    public float characterMassMultiplier = 1.0f;
+    public Vector2 movementSpeed = new Vector2(10f, 3f);
+    public float jumpHeight = 40f;  // might remove this variable cuz it's not common to every animal
+    public float friction = 0.5f;
+    
+
+    [Header("Input variables")]
     [SerializeField]
     protected InputActionAsset inputActionAsset;
 
@@ -21,12 +30,8 @@ public class NetworkPlayerController : NetworkBehaviour
 
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField]
-    public float movementSpeed = 10f;
 
-    [SerializeField]
-    public float jumpHeight = 40f;
-
+    [Header("Others")]
     [SerializeField]
     protected Vector2 direction = new Vector2(1,0);
 
@@ -110,7 +115,7 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             direction.x = 1.0f * Mathf.Sign(md.Move.x);
         }
-        _rigidbody.velocity = new Vector2(md.Move.x * movementSpeed, _rigidbody.velocity.y);
+        _rigidbody.velocity = new Vector2(md.Move.x * movementSpeed.x, _rigidbody.velocity.y);
     }
 
     [Reconcile]
