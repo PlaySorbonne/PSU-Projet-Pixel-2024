@@ -100,7 +100,7 @@ public class NetworkPlayerController : NetworkBehaviour
     }
 
     [Replicate]
-    protected void Replicate(MovementData md, ReplicateState rs = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
+    private void Replicate(MovementData md, ReplicateState rs = ReplicateState.Invalid, Channel channel = Channel.Unreliable)
     {
         if (md.Dash)
         {
@@ -114,7 +114,7 @@ public class NetworkPlayerController : NetworkBehaviour
     }
 
     [Reconcile]
-    protected void Reconcile(ReconciliationData rd, Channel channel = Channel.Unreliable)
+    private void Reconcile(ReconciliationData rd, Channel channel = Channel.Unreliable)
     {
         _rigidbody.MovePosition(rd.Position);
         _rigidbody.velocity = rd.Velocity;
