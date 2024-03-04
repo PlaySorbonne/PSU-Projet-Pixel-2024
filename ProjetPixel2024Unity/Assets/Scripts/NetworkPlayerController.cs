@@ -24,13 +24,6 @@ public class NetworkPlayerController : NetworkBehaviour
     [Header("Input variables")]
     [SerializeField]
     protected InputActionAsset inputActionAsset;
-
-    protected InputAction _moveAction;
-
-    protected InputAction _attackAction;
-    protected InputAction _defenseAction;
-    protected InputAction _dashAction;
-
     protected Rigidbody2D _rigidbody;
 
 
@@ -46,14 +39,6 @@ public class NetworkPlayerController : NetworkBehaviour
 
     public override void OnStartNetwork()
     {
-        _moveAction = inputActionAsset.FindAction("Move");
-        _dashAction = inputActionAsset.FindAction("Dash");
-        _attackAction = inputActionAsset.FindAction("Attack");
-        _defenseAction = inputActionAsset.FindAction("Defense");
-        _attackAction.Enable();
-        _defenseAction.Enable();
-        _moveAction.Enable();
-        _dashAction.Enable();
         _rigidbody = GetComponent<Rigidbody2D>();
         TimeManager.OnTick += TimeManagerTickEventHandler;
         TimeManager.OnPostTick += TimeManagerPostTickEventHandler;

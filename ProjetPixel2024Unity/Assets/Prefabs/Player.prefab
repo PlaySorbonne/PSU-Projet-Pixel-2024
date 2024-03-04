@@ -280,8 +280,8 @@ MonoBehaviour:
   _predictionType: 2
   _graphicalObject: {fileID: 1307848118241050396}
   _enableStateForwarding: 1
-  _ownerInterpolation: 1
-  _enableTeleport: 0
+  _ownerInterpolation: 30
+  _enableTeleport: 1
   _teleportThreshold: 1
   <PrefabId>k__BackingField: 9
   <SpawnableCollectionId>k__BackingField: 0
