@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using FishNet.Object;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Combat : MonoBehaviour
+public class Combat : NetworkBehaviour
 {
     private int damage = 1;
 
@@ -35,6 +36,6 @@ public class Combat : MonoBehaviour
 
     public void DestroyHitbox() 
     {
-        Destroy(gameObject);
+        base.Despawn();
     }
 }
