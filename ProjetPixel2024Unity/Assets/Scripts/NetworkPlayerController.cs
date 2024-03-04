@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using FishNet;
 using FishNet.Object;
 using FishNet.Object.Prediction;
 using FishNet.Transporting;
@@ -10,6 +11,8 @@ using UnityEngine.InputSystem;
 
 public class NetworkPlayerController : NetworkBehaviour
 {
+    public GameObject attackHitboxPrefab;
+    
     [Header("Gameplay variables")]
     public int health = 5;
     public float characterMassMultiplier = 1.0f;
@@ -81,12 +84,20 @@ public class NetworkPlayerController : NetworkBehaviour
         _move = value.Get<Vector2>();
     }
 
+    public void OnAttack(InputValue value)
+    {
+        if (!IsOwner) return;
+
+        _attack = value.isPressed;   
+    }
+
     protected void TimeManagerTickEventHandler()
     {
         if (IsOwner)
         {
-            MovementData md = new(_move, _dash);
+            MovementData md = new(_move, _dash, _attack);
             _dash = false;
+            _attack = false;
             Replicate(md);
         }
         else
@@ -111,10 +122,17 @@ public class NetworkPlayerController : NetworkBehaviour
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpHeight);
         }
+        if (md.Attack) 
+        {
+            GameObject attackHitbox = Instantiate(attackHitboxPrefab, transform.position, Quaternion.identity);
+            attackHitbox.transform.position = transform.position + direction.ConvertTo<Vector3>();
+            InstanceFinder.ServerManager.Spawn(attackHitbox, null);
+        }
         if (md.Move.x != 0.0f) 
         {
             direction.x = 1.0f * Mathf.Sign(md.Move.x);
         }
+
         _rigidbody.velocity = new Vector2(md.Move.x * movementSpeed.x, _rigidbody.velocity.y);
     }
 
@@ -131,11 +149,14 @@ public class NetworkPlayerController : NetworkBehaviour
         public readonly Vector2 Move;
         public readonly bool Dash;
 
-        public MovementData(Vector2 move, bool dash)
+        public readonly bool Attack;
+
+        public MovementData(Vector2 move, bool dash, bool attack)
         {
             _tick = 0u;
             Move = move;
             Dash = dash;
+            Attack = attack;
         }
 
         public readonly uint GetTick()

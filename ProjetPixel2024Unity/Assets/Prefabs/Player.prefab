@@ -283,7 +283,7 @@ MonoBehaviour:
   _ownerInterpolation: 1
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 7
+  <PrefabId>k__BackingField: 9
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 0
   <SceneId>k__BackingField: 0
@@ -303,7 +303,11 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 1511292624058816975}
   _networkObjectCache: {fileID: 1511292624058816975}
-  inputActionAsset: {fileID: -944628639613478452, guid: aae12f6661d000848ae527b9a370c842, type: 3}
-  movementSpeed: 10
+  attackHitboxPrefab: {fileID: 6596755156023087019, guid: f03de3f1602c2874cbe1a3a910dc9e1d, type: 3}
+  health: 5
+  characterMassMultiplier: 1
+  movementSpeed: {x: 10, y: 3}
   jumpHeight: 40
+  friction: 0.5
+  inputActionAsset: {fileID: -944628639613478452, guid: aae12f6661d000848ae527b9a370c842, type: 3}
   direction: {x: 1, y: 0}
