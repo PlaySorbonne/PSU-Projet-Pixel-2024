@@ -95,7 +95,7 @@ public class NetworkPlayerController : NetworkBehaviour
     {
         if (IsOwner)
         {
-            MovementData md = new(_move, _dash, _attack);
+            MovementData md = new(_move.x, _move.y, _dash, _attack);
             _dash = false;
             _attack = false;
             Replicate(md);
@@ -128,12 +128,12 @@ public class NetworkPlayerController : NetworkBehaviour
             attackHitbox.transform.position = transform.position + direction.ConvertTo<Vector3>();
             InstanceFinder.ServerManager.Spawn(attackHitbox, null);
         }
-        if (md.Move.x != 0.0f) 
+        if (md.MoveX != 0.0f) 
         {
-            direction.x = 1.0f * Mathf.Sign(md.Move.x);
+            direction.x = 1.0f * Mathf.Sign(md.MoveX);
         }
 
-        _rigidbody.velocity = new Vector2(md.Move.x * movementSpeed.x, _rigidbody.velocity.y);
+        _rigidbody.velocity = new Vector2(md.MoveX * movementSpeed.x, _rigidbody.velocity.y);
     }
 
     [Reconcile]
@@ -146,15 +146,17 @@ public class NetworkPlayerController : NetworkBehaviour
     private struct MovementData : IReplicateData
     {
         private uint _tick;
-        public readonly Vector2 Move;
+        public readonly float MoveX;
+        public readonly float MoveY;
         public readonly bool Dash;
 
         public readonly bool Attack;
 
-        public MovementData(Vector2 move, bool dash, bool attack)
+        public MovementData(float moveX, float moveY, bool dash, bool attack)
         {
             _tick = 0u;
-            Move = move;
+            MoveX = moveX;
+            MoveY = moveY;
             Dash = dash;
             Attack = attack;
         }
