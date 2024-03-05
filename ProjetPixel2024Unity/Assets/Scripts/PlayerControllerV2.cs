@@ -94,7 +94,7 @@ public class PlayerControllerV2 : NetworkBehaviour
     {
         if (!IsServerStarted) return;
 
-        ReconciliationData rd = new(_rigidbody.position.x, _rigidbody.velocity);
+        ReconciliationData rd = new(_rigidbody.position, _rigidbody.velocity);
 
         Reconcile(rd);
     }
@@ -116,8 +116,7 @@ public class PlayerControllerV2 : NetworkBehaviour
     [Reconcile]
     private void Reconcile(ReconciliationData rd, Channel channel = Channel.Unreliable)
     {
-        //_rigidbody.position.x = rd.PositionX;
-        _rigidbody.MovePosition(new Vector2(rd.PositionX, _rigidbody.position.y));
+        _rigidbody.MovePosition(rd.Position);
         _rigidbody.velocity = rd.Velocity;
     }
 
@@ -150,13 +149,13 @@ public class PlayerControllerV2 : NetworkBehaviour
     private struct ReconciliationData : IReconcileData
     {
         private uint _tick;
-        public float PositionX;
+        public Vector3 Position;
         public Vector2 Velocity;
 
-        public ReconciliationData(float positionX, Vector2 velocity)
+        public ReconciliationData(Vector3 position, Vector2 velocity)
         {
             _tick = 0;
-            PositionX = positionX;
+            Position = position;
             Velocity = velocity;
         }
 
