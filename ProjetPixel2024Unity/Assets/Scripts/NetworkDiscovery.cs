@@ -382,7 +382,7 @@ namespace FishNet.Discovery
 		/// <param name="message">Message to log.</param>
 		private void LogInformation(string message)
 		{
-			if (_networkManager.CanLog(LoggingType.Common)) Debug.Log($"[{nameof(NetworkDiscovery)}] {message}");
+			//if (_networkManager.CanLog(LoggingType.Common)) Debug.Log($"[{nameof(NetworkDiscovery)}] {message}");
 		}
 
 		/// <summary>
@@ -391,7 +391,7 @@ namespace FishNet.Discovery
 		/// <param name="message">Message to log.</param>
 		private void LogWarning(string message)
 		{
-			if (_networkManager.CanLog(LoggingType.Warning)) Debug.LogWarning($"[{nameof(NetworkDiscovery)}] {message}");
+			//if (_networkManager.CanLog(LoggingType.Warning)) Debug.LogWarning($"[{nameof(NetworkDiscovery)}] {message}");
 		}
 
 		/// <summary>
@@ -400,7 +400,7 @@ namespace FishNet.Discovery
 		/// <param name="message">Message to log.</param>
 		private void LogError(string message)
 		{
-			if (_networkManager.CanLog(LoggingType.Error)) Debug.LogError($"[{nameof(NetworkDiscovery)}] {message}");
+			//if (_networkManager.CanLog(LoggingType.Error)) Debug.LogError($"[{nameof(NetworkDiscovery)}] {message}");
 		}
 	}
 }
