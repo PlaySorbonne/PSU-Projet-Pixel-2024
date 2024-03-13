@@ -5,17 +5,18 @@ using FishNet;
 using FishNet.Object;
 using FishNet.Object.Prediction;
 
-public class BasePlayerController : NetworkBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class BasePlayerController : NetworkBehaviour {
+    public float moveSpeed = 5f;
+    public float jumpForce = 5f;
+    public float gravityScale = 1f;
+    public float maxFallSpeed = -100f;
 
-    // Update is called once per frame
-    void Update()
+    protected Vector2 velocity = Vector2.zero;
+    protected CharacterController characterController;
+
+
+    private void Awake()
     {
-        
+        characterController = GetComponent<CharacterController>();
     }
 }
