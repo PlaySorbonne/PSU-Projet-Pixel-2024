@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class OnScreenDebug : MonoBehaviour{
     float DEBUG_PRINT_TIME = 6.0f;
+    int MAX_NUMBER_OF_MESSAGES = 25;
 
 	string myLog;
     List<string> logMessages = new List<string>();
@@ -40,6 +41,11 @@ public class OnScreenDebug : MonoBehaviour{
 	void HandleLog(string logString, string stackTrace, LogType type){
         logMessages.Add(logString);
         logRemainingTimes.Add(DEBUG_PRINT_TIME);
+        if (logMessages.Count > MAX_NUMBER_OF_MESSAGES)
+        {
+            logMessages.RemoveAt(0);
+            logRemainingTimes.RemoveAt(0);
+        }
     }
 
 	void OnGUI () {

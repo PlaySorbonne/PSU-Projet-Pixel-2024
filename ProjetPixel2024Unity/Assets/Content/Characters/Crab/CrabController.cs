@@ -1,42 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class CrabController : BasePlayerController
+public class CrabController : NetworkPlayerController
 {
-    private float yVelocity;
+    private bool isGrounded;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void OnDash(InputValue value)
     {
-        
+        if (!IsOwner) return;
+
+        //_dash = value.isPressed;
     }
 
-    void Jump()
+    void OnTriggerEnter(Collider other) {
+        Debug.Log("heyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+    }
+
+    public void OnMove(InputValue value)
     {
-        yVelocity = jumpForce;
+        if (!IsOwner) return;
+
+        Vector2 movementInput = value.Get<Vector2>();
+        xVelocity = movementInput.x * movementSpeed.x;
+        yVelocity = Mathf.Min(0, yVelocity + movementInput.y * movementSpeed.y);  // don't jump but can slow down fall
+    }
+
+    public void OnAttack(InputValue value)
+    {
+        if ((!IsOwner) || (!value.isPressed)) return;
+
+    }
+
+    void OnJump()
+    {
+        yVelocity += jumpHeight;
     }
 
     void Update()
     {
         if (!IsOwner) return;
 
-        yVelocity += Physics2D.gravity.y * Time.deltaTime * gravityScale;
+        isGrounded = characterController.isGrounded;
+
+        yVelocity += Physics2D.gravity.y * Time.deltaTime * characterMassMultiplier ;
         if (yVelocity < maxFallSpeed)
         {
             yVelocity = maxFallSpeed;
         }
-        float horizontal = Input.GetAxis("Horizontal");
-        
-        if (Input.GetButtonDown("Jump") && characterController.isGrounded)
+
+        if (isGrounded && yVelocity < 0)
         {
-            Jump();
+            yVelocity = 0f;
         }
-        Vector2 offset = new Vector2(horizontal * moveSpeed, yVelocity) * Time.deltaTime;
-        characterController.Move(offset);
 
-
-        velocity = new Vector2(velocity.x, yVelocity);
+        characterController.Move(new Vector2(xVelocity, yVelocity) * Time.deltaTime);
     }
 }
