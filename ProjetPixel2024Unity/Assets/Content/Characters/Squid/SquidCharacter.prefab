@@ -7,9 +7,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1307848118241050396, guid: ce582312394d4594ebc8b66a130846ec, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0152
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506655392782002450, guid: ce582312394d4594ebc8b66a130846ec, type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506655392782002450, guid: ce582312394d4594ebc8b66a130846ec, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1511292624058816975, guid: ce582312394d4594ebc8b66a130846ec, type: 3}
       propertyPath: _scenePathHash
-      value: 2979790221
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1511292624058816975, guid: ce582312394d4594ebc8b66a130846ec, type: 3}
       propertyPath: <SceneId>k__BackingField
