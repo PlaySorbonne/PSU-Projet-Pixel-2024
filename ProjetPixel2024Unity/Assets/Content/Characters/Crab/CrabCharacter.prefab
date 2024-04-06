@@ -126,10 +126,11 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 975016416107116119}
   attackHitboxPrefab: {fileID: 0}
   health: 5
-  characterMassMultiplier: 0.5
-  jumpHeight: 40
+  characterMassMultiplier: 2
+  jumpHeight: 20
   friction: 0.5
   movementSpeed: {x: 10, y: 3}
   maxFallSpeed: -100
   inputActionAsset: {fileID: 0}
   direction: {x: 1, y: 0}
+  maxJumpChargeTime: 1.5

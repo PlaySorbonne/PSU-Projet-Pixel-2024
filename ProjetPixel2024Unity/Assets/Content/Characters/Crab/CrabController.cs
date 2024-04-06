@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class CrabController : NetworkPlayerController
 {
     private bool isGrounded;
+    public float maxJumpChargeTime = 1.5f;
+    private float jumpChargeTime = 0.0f;
 
     public void OnDash(InputValue value)
     {
@@ -14,17 +16,13 @@ public class CrabController : NetworkPlayerController
         //_dash = value.isPressed;
     }
 
-    void OnTriggerEnter(Collider other) {
-        Debug.Log("heyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-    }
-
     public void OnMove(InputValue value)
     {
         if (!IsOwner) return;
 
         Vector2 movementInput = value.Get<Vector2>();
         xVelocity = movementInput.x * movementSpeed.x;
-        yVelocity = Mathf.Min(0, yVelocity + movementInput.y * movementSpeed.y);  // don't jump but can slow down fall
+        yVelocity = Mathf.Max(maxFallSpeed, yVelocity + movementInput.y * movementSpeed.y);  // don't jump but can slow down fall
     }
 
     public void OnAttack(InputValue value)
@@ -33,16 +31,34 @@ public class CrabController : NetworkPlayerController
 
     }
 
-    void OnJump()
-    {
-        yVelocity += jumpHeight;
+    void OnJump(InputValue value)
+    {   
+        // jump button pressed (holding the button charges the jump)
+        if (value.isPressed) {
+            jumpChargeTime = maxJumpChargeTime;
+        }
+        // jump button released
+        else if (isGrounded) {
+            jumpChargeTime = Mathf.Max(0.0f, jumpChargeTime);
+            float jumpCharge = Mathf.Sqrt(1.0f - jumpChargeTime / maxJumpChargeTime);
+            Debug.Log("Crab jump with charge=" + (jumpCharge*100f).ToString() + "% ; remainging time=" + jumpChargeTime.ToString());
+            yVelocity += jumpHeight * jumpCharge;
+            isGrounded = false;
+            if (jumpCharge >= 0.95f) {
+                Debug.Log("Crab super jump!");
+            }
+        }
     }
 
     void Update()
     {
         if (!IsOwner) return;
 
+        // check if character is on the ground
         isGrounded = characterController.isGrounded;
+
+        // charge jump (only relevant if player is holding the jump button)
+        jumpChargeTime -= Time.deltaTime;
 
         yVelocity += Physics2D.gravity.y * Time.deltaTime * characterMassMultiplier ;
         if (yVelocity < maxFallSpeed)
@@ -50,9 +66,9 @@ public class CrabController : NetworkPlayerController
             yVelocity = maxFallSpeed;
         }
 
-        if (isGrounded && yVelocity < 0)
+        if (isGrounded && yVelocity < -1.0f)
         {
-            yVelocity = 0f;
+            yVelocity = -1.0f;
         }
 
         characterController.Move(new Vector2(xVelocity, yVelocity) * Time.deltaTime);

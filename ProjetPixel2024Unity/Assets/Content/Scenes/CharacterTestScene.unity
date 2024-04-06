@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298c0078c0063cf4884a1a97e870348a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCharacter: 1
+  currentCharacter: 0
   crabPrefab: {fileID: 975016416107116119, guid: 95d7ba0622e0a1d49bf4985a911acdaa, type: 3}
   squidPrefab: {fileID: 5551252160462237340, guid: 5fe76b629ee6d4842b923a5d71017cf5, type: 3}
   fishPrefab: {fileID: 0}
@@ -730,6 +730,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411347829955723427, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
       propertyPath: _componentIndexCache
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969859661747991850, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
+      propertyPath: m_Size.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8734945309924864334, guid: db469ad609fa7a644a5cc6806063cb38, type: 3}
