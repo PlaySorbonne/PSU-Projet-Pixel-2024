@@ -8,6 +8,7 @@ public class CrabController : NetworkPlayerController
     private bool isGrounded;
     public float maxJumpChargeTime = 1.5f;
     private float jumpChargeTime = 0.0f;
+    private float lastJumpPower = 0.0f;
 
     public void OnDash(InputValue value)
     {
@@ -45,7 +46,9 @@ public class CrabController : NetworkPlayerController
             yVelocity += jumpHeight * jumpCharge;
             isGrounded = false;
             if (jumpCharge >= 0.95f) {
-                Debug.Log("Crab super jump!");
+                lastJumpPower = 3.0f;
+            } else {
+                lastJumpPower = jumpCharge;
             }
         }
     }
@@ -66,8 +69,13 @@ public class CrabController : NetworkPlayerController
             yVelocity = maxFallSpeed;
         }
 
-        if (isGrounded && yVelocity < -1.0f)
+        if (isGrounded)
         {
+            if (lastJumpPower > 0.0f)
+            {
+                cameraShake.ScreenShake(0.5f*lastJumpPower, 0.5f*lastJumpPower, 20f*lastJumpPower);
+                lastJumpPower = 0.0f;
+            }
             yVelocity = -1.0f;
         }
 

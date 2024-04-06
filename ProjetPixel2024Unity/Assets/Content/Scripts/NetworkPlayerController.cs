@@ -24,6 +24,8 @@ public class NetworkPlayerController : NetworkBehaviour
     protected float xVelocity = 0f;
     protected float yVelocity = 0f;
     protected CharacterController characterController;    
+    protected Camera playerCamera;
+    protected Shake cameraShake;
 
     [Header("Input variables")]
     [SerializeField]
@@ -39,7 +41,9 @@ public class NetworkPlayerController : NetworkBehaviour
     public override void OnStartNetwork()
     {
         characterController = GetComponent<CharacterController>();
-        
+        // find first object with tag MainCamera
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cameraShake = playerCamera.GetComponent<Shake>();
     }
 
     public override void OnStartClient()
