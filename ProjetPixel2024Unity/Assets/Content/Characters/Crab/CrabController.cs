@@ -53,6 +53,15 @@ public class CrabController : NetworkPlayerController
         }
     }
 
+    void JumpCrush()
+    // Ability: crush opponents after powerful jump
+    {
+        cameraShake.ScreenShake(0.5f, 0.5f*lastJumpPower, 20f*lastJumpPower);
+        Debug.Log("Crab crush with power=" + (lastJumpPower*100f).ToString() + "%");
+        lastJumpPower = 0.0f;
+        //TODO: add damage to nearby players
+    }
+
     void Update()
     {
         if (!IsOwner) return;
@@ -71,12 +80,11 @@ public class CrabController : NetworkPlayerController
 
         if (isGrounded)
         {
-            if (lastJumpPower > 0.0f)
+            if (yVelocity < 1.0f)
             {
-                cameraShake.ScreenShake(0.5f*lastJumpPower, 0.5f*lastJumpPower, 20f*lastJumpPower);
-                lastJumpPower = 0.0f;
+                yVelocity = -1.0f;
+                if (lastJumpPower > 0.0f) JumpCrush();
             }
-            yVelocity = -1.0f;
         }
 
         characterController.Move(new Vector2(xVelocity, yVelocity) * Time.deltaTime);
